@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Download PDF</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Your Payment is Approved!</h1>
+<p>Click below to download your SCH 306 Revision PDF:</p>
+<a id="downloadLink" href="#">Download PDF</a>
+
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+const link = urlParams.get('link');
+if (link) {
+    document.getElementById('downloadLink').href = `/api/user/download/${link}`;
+}
+</script>
+</body>
+</html>
