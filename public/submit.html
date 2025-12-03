@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Submit Payment</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Submit M-Pesa Code</h1>
+<form id="paymentForm">
+  <input type="text" name="name" placeholder="Full Name" required>
+  <input type="text" name="phone" placeholder="Phone Number" required>
+  <input type="text" name="mpesa_code" placeholder="Transaction Code" required>
+  <button type="submit">Submit</button>
+</form>
+
+<p id="response"></p>
+
+<script>
+document.getElementById('paymentForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const form = e.target;
+    const data = {
+        name: form.name.value,
+        phone: form.phone.value,
+        mpesa_code: form.mpesa_code.value
+    };
+    const res = await fetch('/api/user/submit-payment', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+    });
+    const text = await res.text();
+    document.getElementById('response').innerText = text;
+});
+</script>
+</body>
+</html>
